@@ -1,20 +1,23 @@
 
-function createObject(id) {
+function createObject(name, age, github) {
   var js_req = new XMLHttpRequest
-  js_req.open("get", "http://localhost:4567/students/" + id)
+  js_req.open("get", "http://localhost:4567/students/create/" + name + "/" + age + "/" + github);
   js_req.send()
-  JSON.parse(js_req.response)
+  js_req.addEventListener("load", function(){
+    r = JSON.parse(js_req.response);
+    alert("Record created for student # " + r.id + "! Name: " + r.name + ", Age: " + r.age + ", Github: " + r.github + ".");
+  }, false);
 }
 
-function saveObject(id) {
+function saveObject(id, name, age, github) {
   var js_req = new XMLHttpRequest;
-  js_req.open("get", "http://localhost:4567/students/" + id + "/save");
+  js_req.open("get", "http://localhost:4567/students/" + id + "/save/" + name + "/" + age + "/" + github);
   js_req.send();
   
-  // Request was sent.
+  // Request was sent --- js_req.send().
   // Sinatra matched route.
-  // Route was run.
-  // Ruby ran.
+  // Route was run  -- requests path was matched to a route handler.
+  // Ruby ran in route handler.
   // DB updated.
   // Student hash was defined.
   // Student hash to_json
@@ -24,7 +27,7 @@ function saveObject(id) {
   
   js_req.addEventListener("load", function(){
     r = JSON.parse(js_req.response);
-    alert("Information updated for " + r.name + "! Age is now " + r.age + ".");
+    alert("Information updated for student # " + r.id + "! Name: " + r.name + ", Age: " + r.age + ", Github: " + github + ".");
   }, false);
 }
 
@@ -61,7 +64,7 @@ function deleteStudent(id) {
   js_req.open("get", "http://localhost:4567/students/" + id + "/delete");
   js_req.send();
   js_req.addEventListener("load", function(){
-    JSON.parse(js_req.response);
-    alert("The student has been deleted.");
+    r = JSON.parse(js_req.response);
+    alert("Student " + r.name + " has been deleted.");
   }, false);
 }
