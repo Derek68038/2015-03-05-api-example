@@ -42,3 +42,17 @@ function ultraWise(id) {
   }, false);
 } 
 
+function canDrink(id) {
+  var js_req = new XMLHttpRequest;
+  js_req.open("get", "http://localhost:4567/students/" + id + "/drink");
+  js_req.send();
+  js_req.addEventListener("load", function(){
+    r = JSON.parse(js_req.response);
+    if (r["drink"] === true) {
+      alert("You're old enough to drink!");
+    } else {
+      alert("Sorry, you have a few more years before you can drink.");   
+    };
+  }, false);
+} 
+

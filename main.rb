@@ -51,6 +51,12 @@ get "/students/:id/wise" do
   student_wise.to_json
 end
 
+get "/students/:id/drink" do
+  student = Student.find(params[:id])
+  student_drink = student.drink_hash
+  student_drink.to_json
+end
+
 # Afternoon Assignment:
 
 # - Add a route that modifies a student record. There's no need for a page that shows a form for editing. We're just working with request paths directly. (Use 'get' instead of 'post' to make it easier to check that things work. Once it's working, change it to 'post'.)

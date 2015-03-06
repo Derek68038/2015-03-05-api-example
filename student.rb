@@ -89,4 +89,11 @@ class Student
       wise: self.ultra_wise?
     }
   end
+  
+  def drink_hash
+    {
+      drink: self.can_drink?
+    }
+  end
+  
 end
