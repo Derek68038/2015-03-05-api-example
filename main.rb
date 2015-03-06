@@ -41,8 +41,8 @@ get "/students/create" do
   student.insert
 end
 
-get "/students/delete" do
-  Student.delete(17)
+get "/students/:id/delete" do
+  Student.delete(params[:id])
 end
 
 get "/students/:id/wise" do

@@ -56,3 +56,12 @@ function canDrink(id) {
   }, false);
 } 
 
+function deleteStudent(id) {
+  var js_req = new XMLHttpRequest;
+  js_req.open("get", "http://localhost:4567/students/" + id + "/delete");
+  js_req.send();
+  js_req.addEventListener("load", function(){
+    JSON.parse(js_req.response);
+    alert("The student has been deleted.");
+  }, false);
+}
