@@ -2,8 +2,23 @@ window.onload = function() {
   findForm = document.getElementById("findStudent");
   findForm.addEventListener("submit", findObject);
   findForm.onsubmit = function() {return false};
+  listLink = document.getElementById("listAll");
+  listLink.addEventListener("click", listAll);
+  listLink.onclick = function() {return false};
 }
 
+function listAll() {
+  var js_req = new XMLHttpRequest;
+  js_req.open("get", "http://localhost:4567/students");
+  js_req.send();
+  js_req.addEventListener("load", function(){
+    r = JSON.parse(js_req.response);
+    r.forEach(function(x) {
+    console.log("Here is the student info - Id: " + x.id + ", Name: " + x.name + ", Age: " + x.age + ", Github: " + x.github + ".");
+  });
+  }, false);
+}
+  
 function findObject() {
 var js_req = new XMLHttpRequest;
   js_req.open("post", "http://localhost:4567/students/find");
