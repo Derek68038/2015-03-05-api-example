@@ -3,8 +3,23 @@ window.onload = function() {
   findForm.addEventListener("submit", findObject);
   findForm.onsubmit = function() {return false};
   listLink = document.getElementById("listAll");
-  listLink.addEventListener("click", listAll);
+  listLink.addEventListener("click", listAllOnPage);
   listLink.onclick = function() {return false};
+}
+
+function listAllOnPage() {
+  var js_req = new XMLHttpRequest;
+  js_req.open("get", "http://localhost:4567/students");
+  js_req.send();
+  js_req.addEventListener("load", function(){
+    r = (JSON.parse(js_req.response));
+    r.forEach(function(x) {
+      document.getElementById("listAllOnPageID").innerHTML = x.id;
+      document.getElementById("listAllOnPageNAME").innerHTML = x.name;
+      document.getElementById("listAllOnPageAGE").innerHTML = x.age;
+      document.getElementById("listAllOnPageGITHUB").innerHTML = x.github;      
+    });
+  }, false);
 }
 
 function listAll() {
