@@ -1,8 +1,23 @@
+window.onload = function() {
+  findForm = document.getElementById("findStudent");
+  findForm.addEventListener("submit", findObject);
+  findForm.onsubmit = function() {return false};
+}
+
+function findObject() {
+var js_req = new XMLHttpRequest;
+  js_req.open("post", "http://localhost:4567/students/find");
+  js_req.send(new FormData(findForm));
+  js_req.addEventListener("load", function(){
+    r = JSON.parse(js_req.response);
+    alert("Here is the student info - Id: " + r.id + ", Name: " + r.name + ", Age: " + r.age + ", Github: " + r.github + ".");
+  }, false);
+}
 
 function createObject(name, age, github) {
-  var js_req = new XMLHttpRequest
+  var js_req = new XMLHttpRequest;
   js_req.open("get", "http://localhost:4567/students/create/" + name + "/" + age + "/" + github);
-  js_req.send()
+  js_req.send();
   js_req.addEventListener("load", function(){
     r = JSON.parse(js_req.response);
     alert("Record created for student # " + r.id + "! Name: " + r.name + ", Age: " + r.age + ", Github: " + r.github + ".");
