@@ -14,10 +14,24 @@ function listAllOnPage() {
   js_req.addEventListener("load", function(){
     r = (JSON.parse(js_req.response));
     r.forEach(function(x) {
-      document.getElementById("listAllOnPageID").innerHTML = x.id;
-      document.getElementById("listAllOnPageNAME").innerHTML = x.name;
-      document.getElementById("listAllOnPageAGE").innerHTML = x.age;
-      document.getElementById("listAllOnPageGITHUB").innerHTML = x.github;      
+      var h2 = document.createElement("h2");
+      var p1 = document.createElement("p");
+      var p2 = document.createElement("p");
+      var p3 = document.createElement("p");
+      var everything = document.createElement("li");
+      
+      var id = document.createTextNode("ID: " + x.id);
+      var studentName = document.createTextNode("Name: " + x.name);
+      var age = document.createTextNode("Age: " + x.age);
+      var github = document.createTextNode("Github: " + x.github);
+      
+
+      everything.appendChild(h2.appendChild(id));
+      everything.appendChild(p1.appendChild(studentName));
+      everything.appendChild(p2.appendChild(age));
+      everything.appendChild(p3.appendChild(github));
+      
+      document.getElementById("display_students").appendChild(everything); 
     });
   }, false);
 }
